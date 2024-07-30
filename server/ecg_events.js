@@ -24,6 +24,7 @@ const readLatencies = (events) => {
   const latenciesSheet = latencies.SheetNames[0];
   const worksheet = latencies.Sheets[latenciesSheet];
   const latenciesData = XLSX.utils.sheet_to_json(worksheet);
+  console.log(latenciesData);
   const timeboxedLatencies = extractTimeboxedLatencies(latenciesData, events);
   return timeboxedLatencies;
 };
@@ -43,7 +44,7 @@ const transformData = (latencies) => {
   return transformedData;
 };
 
-const readFilterVitals = () => {
+const main = () => {
   const events = readEvents();
   const latencies = readLatencies(events);
   const transformedData = transformData(latencies);
@@ -53,4 +54,4 @@ const readFilterVitals = () => {
   XLSX.writeFile(wb, outputFilePath);
 };
 
-readFilterVitals();
+main();
